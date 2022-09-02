@@ -10,7 +10,7 @@ class SqliteRepository(AbstractSqlRepository):
         self._conn = sqlite3.connect(database_path)
 
     def get(self, query: str) -> pd.DataFrame:
-        """_summary_
+        """Get data from table via pandas.
 
         Args:
             query (str): _description_
