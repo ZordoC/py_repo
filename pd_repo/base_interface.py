@@ -18,6 +18,7 @@ class AbstractRepository(ABC):
         NotImplementedError: _description_
         NotImplementedError: _description_
     """
+
     @abstractmethod
     def add(self, **kwargs) -> None:
         """_summary_

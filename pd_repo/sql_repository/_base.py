@@ -8,9 +8,26 @@ class AbstractSqlRepository(ABC):
     """Interface for SQl type storage."""
 
     @abstractmethod
-    def add(self, df: pd.DataFrame, table: str) -> None:
+    def add(self, df: pd.DataFrame, table: str, if_exists: str) -> None:
+        """Add dataframe to a table.
+
+            df (pd.DataFrame): DataFrame to be added.
+            table (str): Table to add DataFrame.
+            if_exists (str): What to do if table exists, ie: append, fail.
+
+        Raises:
+            NotImplementedError: Abstract methods don't have implementation.
+        """
         raise NotImplementedError
 
     @abstractmethod
     def get(self, query: str) -> pd.DataFrame:
+        """
+
+        Args:
+            query (str): SQL query to get data from DB.
+
+        Raises:
+            NotImplementedError: Abstract methods don't have implementation.
+        """
         raise NotImplementedError

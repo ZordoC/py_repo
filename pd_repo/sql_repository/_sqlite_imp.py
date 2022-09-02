@@ -1,3 +1,4 @@
+"""Implementation of repository pattern for SQLite database."""
 import sqlite3
 
 import pandas as pd
@@ -6,6 +7,8 @@ from ._base import AbstractSqlRepository
 
 
 class SqliteRepository(AbstractSqlRepository):
+    """Concrete implementation of ``AbstractSqlRepository``"""
+
     def __init__(self, database_path: str):
         self._conn = sqlite3.connect(database_path)
 
