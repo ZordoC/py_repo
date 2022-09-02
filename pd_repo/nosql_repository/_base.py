@@ -1,0 +1,1 @@
+"""Interface for NoSQL repository """
