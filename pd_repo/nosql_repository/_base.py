@@ -1,14 +1,13 @@
-"""Abstract base class for SQL type storage, Postgres, MySQL, SQLite ..."""
-from abc import ABC, abstractmethod
+"""Interface for No-SQL-type respositories"""
+from abc import abstractmethod, ABC
 
 import pandas as pd
 
 
-class AbstractSqlRepository(ABC):
-    """Interface for SQl type storage."""
+class AbstractNoSqlRepository(ABC):
 
     @abstractmethod
-    def add(self, df: pd.DataFrame, table: str) -> None:
+    def add(self, df: pd.DataFrame, collection: str) -> None:
         """Add dataframe to a table.
 
             df (pd.DataFrame): DataFrame to be added.
@@ -21,24 +20,11 @@ class AbstractSqlRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, query: str) -> pd.DataFrame:
+    def filter(self, filter: dictionary, collection: str) -> pd.DataFrame:
         """Get data from DB.
 
         Args:
             query (str): SQL query to get data from DB.
-
-        Raises:
-            NotImplementedError: Abstract methods don't have implementation.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def delete(self, query: str) -> pd.DataFrame:
-        """
-        Delete data from DB
-
-        Args:
-            query (str): _description_
 
         Raises:
             NotImplementedError: Abstract methods don't have implementation.

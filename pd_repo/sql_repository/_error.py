@@ -1,4 +1,4 @@
-"""Module containing custome exceptions for SqliteRepository."""
+"""Module containing custom exceptions for SqliteRepository."""
 
 
 class SqliteRepositoryError(Exception):

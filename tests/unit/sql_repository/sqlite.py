@@ -8,15 +8,6 @@ TABLE = "test_table"
 
 
 @pytest.fixture()
-def test_df():
-    """Dataframe for testing."""
-    df = pd.DataFrame(
-        data=[[0, "10/11/12"], [1, "12/11/10"]], columns=["int_column", "date_column"]
-    )
-    return df
-
-
-@pytest.fixture()
 def repo():
     return SqliteRepository("test.db")
 
@@ -31,7 +22,7 @@ def test_get_data(repo, test_df):
 
 def test_append_to_table(repo, test_df):
     """Test for appending dataframe to a table."""
-    repo.add(test_df, TABLE, if_exists="append")
+    repo.add(test_df, TABLE)
     SQL = f"SELECT * FROM {TABLE}"
 
     df = repo.get(SQL)

@@ -12,6 +12,17 @@ COPY . /app
 RUN pip install -r requirements_dev.txt
 RUN pip install -r requirements.txt
 
-
 # install tools
 RUN apt-get update && apt-get install git -y openssl -y build-essential -y
+
+# Install Mongo
+RUN apt-get systemctl -y 
+
+RUN systemctl enable mongod  \
+    systemctl start mongod \ 
+    systemctl status mongod  \
+    systemctl enable mongod
+
+# Start Mongo
+RUN systemctl enable mongod \
+    systemctl start mongod
