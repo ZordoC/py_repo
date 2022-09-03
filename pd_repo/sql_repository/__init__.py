@@ -2,6 +2,12 @@
 repositories."""
 from ._base import AbstractSqlRepository
 from ._fake import FakeSqlRepository
-from ._sqlite_imp import SqliteRepository
+from ._pandas_imp import PandasSqliteRepository
+from ._sqlit3_imp import Sqlite3Repository
 
-__all__ = ["AbstractSqlRepository", "SqliteRepository", "FakeSqlRepository"]
+__all__ = [
+    "AbstractSqlRepository",
+    "FakeSqlRepository",
+    "Sqlite3Repository",
+    "PandasSqliteRepository",
+]

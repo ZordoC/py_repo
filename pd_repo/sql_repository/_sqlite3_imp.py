@@ -6,23 +6,22 @@ import pandas as pd
 from ._base import AbstractSqlRepository
 
 
-class SqliteRepository(AbstractSqlRepository):
+class Sqlite3Repository(AbstractSqlRepository):
     """Concrete implementation of ``AbstractSqlRepository``"""
 
     def __init__(self, database_path: str):
         self._conn = sqlite3.connect(database_path)
 
     def get(self, query: str) -> pd.DataFrame:
-        """Get data from table via pandas.
+        """Get data from table via sqlite3 cursor.
 
         Args:
-            query (str): _description_
+            query (str): Query to be executed
 
         Returns:
-            pd.DataFrame: _description_
+            pd.DataFrame: Query result.
         """
-        df = pd.read_sql(query, self._conn)
-        df = df.drop(columns=["index"], axis=0)
+        results = self._cursor.execute(query)
         return df.reset_index(drop=True).convert_dtypes()
 
     def add(self, df: pd.DataFrame, table: str, if_exists: str = "append") -> None:

@@ -1,4 +1,4 @@
-"""Fake Implementation for testing"""
+"""Fake Implementation for testing."""
 from ._base import AbstractNoSqlRepository
 
 
