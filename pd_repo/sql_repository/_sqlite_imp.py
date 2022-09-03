@@ -23,16 +23,16 @@ class SqliteRepository(AbstractSqlRepository):
         """
         df = pd.read_sql(query, self._conn)
         df = df.drop(columns=["index"], axis=0)
-        return df.reset_index(drop=True)
+        return df.reset_index(drop=True).convert_dtypes()
 
-    def add(self, df: pd.DataFrame, table: str) -> None:
+    def add(self, df: pd.DataFrame, table: str, if_exists: str = "append") -> None:
         """_summary_
 
         Args:
             df (pd.DataFrame): _description_
             table (str): _description_
         """
-        df.to_sql(table, self._conn, if_exists="append")
+        df.to_sql(table, self._conn, if_exists=if_exists)
 
     def delete(self, query: str) -> None:
         """_summary_

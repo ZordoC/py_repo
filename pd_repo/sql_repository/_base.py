@@ -8,7 +8,7 @@ class AbstractSqlRepository(ABC):
     """Interface for SQl type storage."""
 
     @abstractmethod
-    def add(self, df: pd.DataFrame, table: str) -> None:
+    def add(self, df: pd.DataFrame, table: str, if_exists: str) -> None:
         """Add dataframe to a table.
 
             df (pd.DataFrame): DataFrame to be added.
@@ -34,8 +34,7 @@ class AbstractSqlRepository(ABC):
 
     @abstractmethod
     def delete(self, query: str) -> pd.DataFrame:
-        """
-        Delete data from DB
+        """Delete data from DB.
 
         Args:
             query (str): _description_

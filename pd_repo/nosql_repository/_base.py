@@ -1,13 +1,12 @@
-"""Interface for No-SQL-type respositories"""
-from abc import abstractmethod, ABC
+"""Interface for No-SQL-type respositories."""
+from abc import ABC, abstractmethod
 
 import pandas as pd
 
 
 class AbstractNoSqlRepository(ABC):
-
     @abstractmethod
-    def add(self, df: pd.DataFrame, collection: str) -> None:
+    def insert_one(self, document: dict, collection: str) -> None:
         """Add dataframe to a table.
 
             df (pd.DataFrame): DataFrame to be added.
@@ -20,7 +19,7 @@ class AbstractNoSqlRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def filter(self, filter: dictionary, collection: str) -> pd.DataFrame:
+    def find(self, query: dict, collection: str, filter: dict = {}) -> dict:
         """Get data from DB.
 
         Args:

@@ -5,7 +5,6 @@ import pytest
 import requests
 
 
-
 @pytest.fixture
 def response():
     """Sample pytest fixture.
@@ -20,5 +19,5 @@ def test_df():
     """Dataframe for testing."""
     df = pd.DataFrame(
         data=[[0, "10/11/12"], [1, "12/11/10"]], columns=["int_column", "date_column"]
-    )
+    ).convert_dtypes()
     return df
