@@ -54,13 +54,10 @@ def repo():
 
 def test_get(repo):
     df = repo.get(f"""SELECT * FROM {TABLE}""")
-    assert 1 == 2
+    assert not df.empty
 
 def test_add(repo, test_df):
     repo.add(test_df,TABLE)
 
 def test_drop_table(conn):
     conn.cursor().execute(f"DROP TABLE {TABLE}")
-
-
-# data=[[0, "10/11/12"], [1, "12/11/10"]], columns=["int_column", "date_column"]
