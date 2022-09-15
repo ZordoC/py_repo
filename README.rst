@@ -1,13 +1,13 @@
-===================
+===============================
 Repository Pattern 
-===================
-
+===============================
 
 
 This is a sample project to demonstrate an implementation and benefits of the ``Repository`` pattern in python.
 
 
-* Why use the repository pattern?
+Why use the repository pattern?
+--------------------------------
 
 The beautfy of this pattern is enhanced when used together with DIP (dependency inversion principle), where it states
 that we should not depend on implementations but rather abstractions.
@@ -17,18 +17,17 @@ and use it to test components that depend on external sources (With some changes
 
 This is shown in the integration tests, where we use the fake to test components that need the a repository.
 
-
-* SPECIAL NOTE:
+SPECIAL NOTE:
+--------------------------------
 
 This is an example repository and I don't advice you to import it to your project and use it as package, rather you should take it as reference
 and adapt it to your needs
 
-
-* Running:
+Running:
+--------------------------------
 
 I recommend developing with VScode and docker container (DockerFile provided). You can install this project as a packag  `make install` or create a wheel
 via `make dist`.
-
 
 
 * Free software: MIT license
