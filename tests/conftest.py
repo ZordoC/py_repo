@@ -21,3 +21,18 @@ def test_df():
         data=[[0, "10/11/12"], [1, "12/11/10"]], columns=["int_column", "date_column"]
     ).convert_dtypes()
     return df
+
+
+@pytest.fixture()
+def test_df_integration():
+    """Dataframe for testing."""
+    df = pd.DataFrame(
+        data=[[41, 3, 17, 4], [32, 1, 18, 1]],
+        columns=[
+            "Age",
+            "Number of sexual partners",
+            "First sexual intercourse",
+            "Num of pregnancies",
+        ],
+    ).convert_dtypes()
+    return df

@@ -11,20 +11,43 @@ from ._error import NotADeleteQuery
 
 class FakeSqlRepository(AbstractSqlRepository):
     def __init__(self):
-        self.table_1 = pd.DataFrame(columns=["int_column", "date_column"])
+        self.table_integration = pd.DataFrame(
+            columns=[
+                "Age",
+                "Number of sexual partners",
+                "First sexual intercourse",
+                "Num of pregnancies",
+            ]
+        )
+        self.table_unit = df = pd.DataFrame(
+            columns=["int_column", "date_column"],
+        ).convert_dtypes()
 
     def add(self, df: pd.DataFrame, table: str, if_exists: str):
         if if_exists == "append":
-            self.table_1 = pd.concat([self.table_1, df]).convert_dtypes()
+            if table == "table_unit":
+                self.table_unit = pd.concat([self.table_unit, df]).convert_dtypes()
+            if table == "table_integration":
+                self.table_integration = pd.concat(
+                    [self.table_integration, df]
+                ).convert_dtypes()
         else:
-            raise NotImplementedError
+            raise NotImplementedError("Only append exists in fake.")
 
     def delete(self, query: str):
-        table_1 = self.table_1  # For duckdb to access
         if "DELETE".lower() not in query.lower():
             raise NotADeleteQuery("It's not a delete query")
-        self.table_1 = pd.DataFrame(columns=["int_column", "date_column"])
+        self.table_unit = pd.DataFrame(columns=["int_column", "date_column"])
+        self.table_integration = pd.DataFrame(
+            columns=[
+                "Age",
+                "Number of sexual partners",
+                "First sexual intercourse",
+                "Num of pregnancies",
+            ]
+        )
 
     def get(self, query: str):
-        table_1 = self.table_1  # For duckdb to access
+        table_unit = self.table_unit  # For duckdb to access
+        table_integration = self.table_integration
         return duckdb.query(query).df().convert_dtypes()

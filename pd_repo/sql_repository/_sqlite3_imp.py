@@ -1,6 +1,6 @@
 """Implementation of repository pattern for SQLite database."""
-import sqlite3
 import re
+import sqlite3
 
 import pandas as pd
 
@@ -51,7 +51,7 @@ class Sqlite3Repository(AbstractSqlRepository):
 
     @staticmethod
     def _get_into_values_string(length: int):
-        s = '(' + ',?'*length + ')'
+        s = "(" + ",?" * length + ")"
         s = re.sub(",", "", s, 1)
         return s
 
@@ -68,6 +68,7 @@ class Sqlite3Repository(AbstractSqlRepository):
         self._conn.execute(query)
 
     def _convert_to_dataframe(self, data: list, columns: str):
-        """
-        """
-        return pd.DataFrame(data, columns=columns).convert_dtypes().reset_index(drop=True)
+        """"""
+        return (
+            pd.DataFrame(data, columns=columns).convert_dtypes().reset_index(drop=True)
+        )

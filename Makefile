@@ -86,6 +86,11 @@ lint: ## lint using flake8 + pylint
 venv-dev:
 	pip install -r requirements_dev.txt
 
+venv:
+	pip install -r requirements.txt
+	
+venv-all: venv-dev venv 
+
 tests-unit:
 	pytest tests/unit
 
