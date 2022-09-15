@@ -23,7 +23,7 @@ class FakeSqlRepository(AbstractSqlRepository):
             columns=["int_column", "date_column"],
         ).convert_dtypes()
 
-    def add(self, df: pd.DataFrame, table: str, if_exists: str):
+    def add(self, df: pd.DataFrame, table: str, if_exists: str = "append"):
         if if_exists == "append":
             if table == "table_unit":
                 self.table_unit = pd.concat([self.table_unit, df]).convert_dtypes()

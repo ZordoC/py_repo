@@ -35,9 +35,9 @@ def extract(url: str) -> pd.DataFrame:
 def transform(df: pd.DataFrame) -> pd.DataFrame:
     """Transform data."""
     df = df.iloc[:, [0, 1, 2, 3]]
-    # columns = list(df.columns)
-    # for col in columns:
-    #     df[col] = df[col].apply(lambda x: (float(x)))
+    columns = list(df.columns)
+    for col in columns:
+        df[col] = df[col].apply(lambda x: (float(x)))
     return df
 
 
