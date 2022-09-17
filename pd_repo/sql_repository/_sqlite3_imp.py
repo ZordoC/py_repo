@@ -32,8 +32,8 @@ class Sqlite3Repository(AbstractSqlRepository):
         """Add a dataframe using sqlite3 engine.
 
         Args:
-            df (pd.DataFrame): _description_
-            table (str): _description_
+            df (pd.DataFrame): Dataframe to be added to DB.
+            table (str): Table of the SQLite database.
         """
         cur = self._conn.cursor()
         data = df.to_records(index=False)
@@ -56,13 +56,10 @@ class Sqlite3Repository(AbstractSqlRepository):
         return s
 
     def delete(self, query: str) -> None:
-        """_summary_
+        """Delete certain asset from a database.
 
         Args:
-            query (str): _description_
-
-        Returns:
-            pd.DataFrame: _description_
+            query (str): DELETE SQL query.
         """
         # TODO need condition to check if is DELETE query.
         self._conn.execute(query)

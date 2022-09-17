@@ -3,6 +3,10 @@
 import pandas as pd
 import pytest
 import requests
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, clear_mappers, sessionmaker
+
+from pd_repo.domain_case.service_layer import metadata, start_mappers
 
 
 @pytest.fixture
@@ -36,3 +40,17 @@ def test_df_integration():
         ],
     ).convert_dtypes()
     return df
+
+
+@pytest.fixture
+def in_memory_db():
+    engine = create_engine("sqlite:///:memory:")
+    metadata.create_all(engine)
+    return engine
+
+
+@pytest.fixture
+def domain_session(in_memory_db):
+    start_mappers()
+    yield sessionmaker(bind=in_memory_db)()
+    clear_mappers()

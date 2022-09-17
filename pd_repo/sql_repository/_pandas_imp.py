@@ -4,6 +4,7 @@ import sqlite3
 import pandas as pd
 
 from ._base import AbstractSqlRepository
+from ._error import NotADeleteQuery
 
 
 class PandasSqliteRepository(AbstractSqlRepository):
@@ -34,10 +35,11 @@ class PandasSqliteRepository(AbstractSqlRepository):
         df.to_sql(table, self._conn, if_exists=if_exists, index=False)
 
     def delete(self, query: str) -> None:
-        """Delete data using query.
+        """Delete data via SQL query.
 
         Args:
             query (str): Delete SQL query.
         """
-        # TODO need condition to check if is DELETE query.
+        if "DELETE".lower() not in query.lower():
+            raise NotADeleteQuery("It's not a delete query")
         self._conn.execute(query)
