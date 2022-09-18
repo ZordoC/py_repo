@@ -1,13 +1,13 @@
 """Unit test for SqliteRepository."""
 import sqlite3
 
-import pandas as pd
 import pytest
 
+from pd_repo.scripts.example import get_random_string
 from pd_repo.sql_repository import Sqlite3Repository
 
 DATABASE = "test_sqlite3.db"
-TABLE = "jose_table_33"
+TABLE = get_random_string(2)
 
 
 @pytest.fixture
@@ -21,9 +21,7 @@ def test_simple_connect(conn):
 
 def test_create_table(conn):
     conn.cursor().execute(f"CREATE TABLE {TABLE}(int_column, date_column)")
-    res = conn.cursor().execute(
-        f"""SELECT "name" FROM pragma_table_info("{TABLE}") LIMIT 1;"""
-    )
+    res = conn.cursor().execute(f"""SELECT "name" FROM pragma_table_info("{TABLE}") LIMIT 1;""")
     result = res.fetchone()[0]
     assert result == "int_column"
 

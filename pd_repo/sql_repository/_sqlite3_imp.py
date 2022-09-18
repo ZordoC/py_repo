@@ -5,6 +5,7 @@ import sqlite3
 import pandas as pd
 
 from ._base import AbstractSqlRepository
+from ._error import NotADeleteQuery
 
 
 class Sqlite3Repository(AbstractSqlRepository):
@@ -51,9 +52,9 @@ class Sqlite3Repository(AbstractSqlRepository):
 
     @staticmethod
     def _get_into_values_string(length: int):
-        s = "(" + ",?" * length + ")"
-        s = re.sub(",", "", s, 1)
-        return s
+        string = "(" + ",?" * length + ")"
+        string = re.sub(",", "", string, 1)
+        return string
 
     def delete(self, query: str) -> None:
         """Delete certain asset from a database.
@@ -61,11 +62,9 @@ class Sqlite3Repository(AbstractSqlRepository):
         Args:
             query (str): DELETE SQL query.
         """
-        # TODO need condition to check if is DELETE query.
+        if "DELETE".lower() not in query.lower():
+            raise NotADeleteQuery("It's not a delete query")
         self._conn.execute(query)
 
     def _convert_to_dataframe(self, data: list, columns: str):
-        """"""
-        return (
-            pd.DataFrame(data, columns=columns).convert_dtypes().reset_index(drop=True)
-        )
+        return pd.DataFrame(data, columns=columns).convert_dtypes().reset_index(drop=True)

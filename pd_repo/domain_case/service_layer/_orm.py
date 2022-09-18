@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Date, ForeignKey, Integer, MetaData, String, Table
+"""Module responsible for the ORM mapping of Order objects and orders table."""
+from sqlalchemy import Column, Integer, MetaData, String, Table
 from sqlalchemy.orm import mapper
 
 from pd_repo.domain_case.domain import Order
@@ -15,4 +16,5 @@ order = Table(
 
 
 def start_mappers():
-    lines_mapper = mapper(Order, order)
+    """Map ``Order`` to orders table."""
+    mapper(Order, order)

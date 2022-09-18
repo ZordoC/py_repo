@@ -70,7 +70,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 format:
 	isort pd_repo tests
-	black pd_repo tests
+	black -l 100 pd_repo tests
 	docformatter --in-place --recursive pd_repo tests
 
 install: clean ## install the package to the active Python's site-packages
@@ -80,16 +80,16 @@ jupyter:
 	jupyter notebook
 
 lint: ## lint using flake8 + pylint
-	flake8 pd_repo tests
-	pylint  pd_repo tests
+	flake8 pd_repo
+	pylint  pd_repo
 
 venv-dev:
 	pip install -r requirements_dev.txt
 
 venv:
 	pip install -r requirements.txt
-	
-venv-all: venv-dev venv 
+
+venv-all: venv-dev venv
 
 tests-unit:
 	pytest tests/unit

@@ -1,22 +1,17 @@
 """Example script to test out the pattern."""
 import argparse
 import random
-import re
 import string
 import warnings
 
 import pandas as pd
 
-from pd_repo.sql_repository import (
-    AbstractSqlRepository,
-    PandasSqliteRepository,
-    Sqlite3Repository,
-)
+from pd_repo.sql_repository import AbstractSqlRepository, PandasSqliteRepository, Sqlite3Repository
 
 warnings.filterwarnings("ignore")
 
 
-DATASET = "https://archive.ics.uci.edu/ml/machine-learning-databases/00383/risk_factors_cervical_cancer.csv"
+DATASET = "https://archive.ics.uci.edu/ml/machine-learning-databases/00383/risk_factors_cervical_cancer.csv"  # pylint: disable=C0301
 
 
 def get_random_string(length):
@@ -37,7 +32,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     df = df.iloc[:, [0, 1, 2, 3]]
     columns = list(df.columns)
     for col in columns:
-        df[col] = df[col].apply(lambda x: (float(x)))
+        df[col] = df[col].astype(float)
     return df
 
 
@@ -59,19 +54,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.use_pandas:
-        repo = PandasSqliteRepository(args.db_name)
+        sql_repo = PandasSqliteRepository(args.db_name)
     else:
-        repo = Sqlite3Repository(args.db_name)
+        sql_repo = Sqlite3Repository(args.db_name)
 
     # for testing purposes we create a random table
-    table_name = get_random_string(4)
+    table_name = get_random_string(4)  # pylint: disable=C0103
 
     # Extract, Transform Load - "application"
     df_raw = extract(DATASET)
     df_final = transform(df_raw)
-    load(df_final, repo, table_name)
+    load(df_final, sql_repo, table_name)
 
-    df_check = repo.get(f"SELECT * FROM {table_name}")
+    df_check = sql_repo.get(f"SELECT * FROM {table_name}")
 
     print(df_check.head(5))
     print(df_final.reset_index(drop=True).head(5))
