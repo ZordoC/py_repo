@@ -4,7 +4,7 @@ import sqlite3
 import pytest
 
 from pd_repo.abstract_case.sql_repository import Sqlite3Repository
-from pd_repo.scripts.example import get_random_string
+from pd_repo.scripts.abstract_example import get_random_string
 
 DATABASE = "test_sqlite3.db"
 TABLE = get_random_string(2)

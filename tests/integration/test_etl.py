@@ -1,8 +1,8 @@
 """Testing using fakes."""
 import pytest
 
-from pd_repo.scripts.example import DATASET, extract, load, transform
-from pd_repo.sql_repository import FakeSqlRepository
+from pd_repo.abstract_case.sql_repository import FakeSqlRepository
+from pd_repo.scripts.abstract_example import DATASET, extract, load, transform
 
 
 @pytest.fixture()

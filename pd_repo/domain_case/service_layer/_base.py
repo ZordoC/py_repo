@@ -4,7 +4,7 @@ import abc
 from pd_repo.domain_case.domain import Order
 
 
-class AbstractOrdersRepository(abc.ABC):
+class AbstractOrderRepository(abc.ABC):
     """Defines an interface for repository family type classes."""
 
     @abc.abstractmethod

@@ -95,14 +95,14 @@ tests-unit:
 	pytest tests/unit
 
 tests-integration:
-	pytest test/integration
+	pytest tests/integration
 
 tests-e2e:
 	pytest test/e2e
 
 tests-basic: tests-unit test-integration
 
-tests-all: tests-unit test-integration test-e2e
+tests-all: tests-unit tests-integration test-e2e
 
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
