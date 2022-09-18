@@ -6,7 +6,11 @@ import warnings
 
 import pandas as pd
 
-from pd_repo.sql_repository import AbstractSqlRepository, PandasSqliteRepository, Sqlite3Repository
+from pd_repo.abstract_case.sql_repository import (
+    AbstractSqlRepository,
+    PandasSqliteRepository,
+    Sqlite3Repository,
+)
 
 warnings.filterwarnings("ignore")
 

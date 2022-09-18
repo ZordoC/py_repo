@@ -1,7 +1,7 @@
 """Unit test for SqlRepository."""
 import pytest
 
-from pd_repo.sql_repository import FakeSqlRepository
+from pd_repo.abstract_case.sql_repository import FakeSqlRepository
 
 
 @pytest.fixture()
