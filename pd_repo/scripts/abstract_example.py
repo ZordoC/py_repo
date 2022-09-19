@@ -73,4 +73,3 @@ if __name__ == "__main__":
     df_check = sql_repo.get(f"SELECT * FROM {table_name}")
 
     print(df_check.head(5))
-    print(df_final.reset_index(drop=True).head(5))
